@@ -1,4 +1,4 @@
-# Reto 3 · Control de producción y calidad
+0# Reto 3 · Control de producción y calidad
 
 **Sector:** manufactura. **Nivel:** intermedio. Integra repetición, contadores, acumulación, decisiones y salida anticipada.
 
