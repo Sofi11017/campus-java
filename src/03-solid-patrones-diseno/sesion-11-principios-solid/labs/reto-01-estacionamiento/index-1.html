@@ -1,0 +1,104 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Desconocido </title></head><body>
+<h1 id="reto-1-estacionamiento-refactorizacion-con-solid">Reto 1 · Estacionamiento · Refactorización con SOLID</h1>
+<p><strong>Punto de partida:</strong> <a href="../../../../01-fundamentos-java/sesion-03-estructuras-repetitivas/labs/reto-01-estacionamiento/README.md">reto original de la sesión 3</a>.</p>
+<p>Trabaja sobre tu solución previa en tu repositorio personal. No modifiques el material docente ni comiences otro sistema. La meta es conservar el comportamiento y mejorar una responsabilidad o dependencia concreta.</p>
+<p>Puedes usar las herramientas de Java estudiadas hasta la sesión 10; las restricciones iniciales de trabajar sin clases auxiliares o colecciones no se trasladan a esta adaptación. Usa IntelliJ y JDK 21 o 17, sin frameworks ni dependencias nuevas.</p>
+<h2 id="reglas-que-debes-conservar">Reglas que debes conservar</h2>
+<ul>
+<li>Automóvil: 4000 pesos/hora; motocicleta: 2000. Horas enteras positivas; dinero con long.</li>
+<li>Automóvil tiene 10 % de descuento solo con <strong>más de 5 horas</strong>; moto 5 % solo con <strong>más de 8</strong>. En el límite exacto no hay descuento.</li>
+<li>Tipo u horas inválidos se corrigen sin registrar un vehículo. Cada vehículo válido aumenta sus contadores y recaudación <strong>una sola vez</strong>.</li>
+<li>Cerrar sin vehículos deja todos los totales en cero. No actives un nuevo límite diario o una tarifa adicional durante la refactorización base.</li>
+</ul>
+<h2 id="diagnostica-antes-de-mover-codigo">Diagnostica antes de mover código</h2>
+<p>Ejecuta las cuatro pruebas de abajo y guarda la salida. Localiza dónde lees datos, eliges la tarifa, calculas el descuento y acumulas la jornada. Imagina dos solicitudes: cambiar el texto del menú y cambiar solo la tarifa de motocicletas. ¿Qué bloques tendrías que editar para cada una? Si ya están separados, conserva lo que funciona.</p>
+<h2 id="cambios-sugeridos-segun-solid">Cambios sugeridos según SOLID</h2>
+<table>
+<thead>
+<tr>
+<th>Principio</th>
+<th>Cambio concreto que puedes evaluar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SRP</strong></td>
+<td>Separa captura de datos, cálculo de cobro y resumen de jornada si están mezclados. Mantén juntos los contadores que representan el mismo estado de jornada.</td>
+</tr>
+<tr>
+<td><strong>OCP</strong></td>
+<td>Define un contrato de cálculo e implementaciones para automóvil y moto. El cliente solicita el cobro a la política recibida sin repetir un if por tipo dentro de la fórmula. El menú puede seguir seleccionando el tipo.</td>
+</tr>
+<tr>
+<td><strong>LSP</strong></td>
+<td>Ambas políticas aceptan las horas válidas acordadas, devuelven importes coherentes y no actualizan la jornada ni leen consola. Sustituir una por otra no debe exigir que el cliente adivine restricciones nuevas.</td>
+</tr>
+<tr>
+<td><strong>ISP</strong></td>
+<td>El contrato de tarifa debe ofrecer lo que necesita el calculador. No le agregues leerMenu o imprimirReporte. Si no hay una interfaz amplia innecesaria, explica por qué no necesitas dividirla.</td>
+</tr>
+<tr>
+<td><strong>DIP</strong></td>
+<td>Entrega al servicio una política de cálculo por constructor o parámetro. Main crea y conecta la implementación; el cálculo no instancia Scanner ni una tarifa concreta cada vez que opera.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Contrato observable:</strong> para horas positivas dentro del rango aceptado por tu programa, importe inicial no negativo, descuento entre cero e inicial y total = inicial − descuento. El cálculo no modifica contadores ni imprime. Mantén el mismo dominio de horas en todas las políticas y valida antes de multiplicar para evitar importes desbordados.</p>
+<h2 id="pasos-de-refactorizacion">Pasos de refactorización</h2>
+<ol>
+<li>Guarda una versión funcional y ejecuta las pruebas originales. No renombres todo al mismo tiempo.</li>
+<li>Extrae el cálculo mezclado con entrada/salida. Dale datos por parámetros y recupera un resultado; conserva exactamente las tarifas y fronteras.</li>
+<li>Si tu diagnóstico justifica el punto de variación, introduce el contrato de cobro y conecta las dos políticas desde Main. Los nombres de las clases los decides tú.</li>
+<li>Haz que la jornada registre el resultado válido una vez. Comprueba que cambiar la presentación no afecta ni recalcula la recaudación.</li>
+<li>Ejecuta el mismo cliente con ambas políticas y repite las pruebas. No hagas casts ni captures un «no soportado» para ocultar una implementación incompatible.</li>
+<li>Explica cómo conectarías otra tarifa sin editar el cliente estable. Implementarla es opcional y no debe alterar las pruebas de las tarifas originales.</li>
+</ol>
+<h2 id="pruebas-de-regresion">Pruebas de regresión</h2>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Horas</th>
+<th>Inicial</th>
+<th>Descuento</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Automóvil</td>
+<td>5</td>
+<td>20000</td>
+<td>0</td>
+<td>20000</td>
+</tr>
+<tr>
+<td>Automóvil</td>
+<td>6</td>
+<td>24000</td>
+<td>2400</td>
+<td>21600</td>
+</tr>
+<tr>
+<td>Motocicleta</td>
+<td>8</td>
+<td>16000</td>
+<td>0</td>
+<td>16000</td>
+</tr>
+<tr>
+<td>Motocicleta</td>
+<td>9</td>
+<td>18000</td>
+<td>900</td>
+<td>17100</td>
+</tr>
+</tbody>
+</table>
+<p>En una jornada con esos cuatro vehículos: <strong>4 vehículos, 2 automóviles, 2 motos y 74700 pesos</strong>. Prueba también tipo 7 y horas 0 sin cambios en los acumuladores; cerrar inmediatamente deja cero.</p>
+<h2 id="como-demostrar-la-mejora">Cómo demostrar la mejora</h2>
+<p>En tu README registra dos cambios que hoy serían costosos, una tabla <strong>principio → problema → cambio → beneficio</strong>, y las pruebas antes/después. Si un principio ya se respeta o no requiere otra interfaz, justifícalo: no inventes métodos vacíos para completar las cinco letras.</p>
+<p>Indica qué archivos tocarías al conectar una variante futura y cuáles quedarían estables. Main puede cambiar para ensamblar objetos; eso no obliga a reescribir el cliente de negocio. Un esquema de dependencias o UML pequeño puede mostrar la diferencia.</p>
+<p>Primero termina la regresión de las reglas originales. Una extensión que cambie requisitos debe probarse por separado y no sustituye las pruebas anteriores. No necesitas una arquitectura fija, un número mínimo de clases ni JUnit.</p>
+<p>Trabaja en <strong>este reto</strong> durante la hora prevista: 10 minutos de diagnóstico, 15 de separación de responsabilidades, 20 para el punto de variación, 10 de pruebas y 5 de evidencia. Completa lo pendiente en casa según indique el docente.</p>
+</body></html>
