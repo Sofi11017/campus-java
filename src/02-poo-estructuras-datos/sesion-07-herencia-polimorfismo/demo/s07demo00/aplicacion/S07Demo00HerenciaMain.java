@@ -6,7 +6,7 @@ public class S07Demo00HerenciaMain {
         System.out.println("Nombre heredado mediante consulta: " + estudiante.getNombre());
         estudiante.mostrarFicha();
 
-        // estudiante.describirIdentidad(); // No compila desde este Main:
+        estudiante.describirIdentidad();  // No compila desde este Main:
         // es protected de Usuario, y estamos fuera de su paquete y no somos una subclase.
     }
 }

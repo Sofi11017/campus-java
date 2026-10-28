@@ -35,3 +35,33 @@ Promedio: 11.6667
 ```
 
 Guarda la respuesta breve y las dos comprobaciones en tu README personal o el del equipo indicado. Completa lo pendiente para la siguiente clase y entrega por Campus según indique el docente.
+
+---
+
+## Solución y Respuestas del Laboratorio
+
+### 1. Predicción inicial (Paso 1)
+- Entradas: `"20", "abc", " 25 ", "80", "", "-10"`.
+  - `"20"`: Aceptada (entero dentro de [-10, 50]).
+  - `"abc"`: Rechazada por formato no convertible (`NumberFormatException`).
+  - `" 25 "`: Aceptada (`strip()` produce `"25"`, dentro de [-10, 50]).
+  - `"80"`: Rechazada por dominio (fuera de rango: 80 > 50).
+  - `""`: Rechazada por dato obligatorio ausente (`isBlank()`).
+  - `"-10"`: Aceptada (entero en el límite inferior permitido).
+- **Resultados globales:** Aceptadas: 3 (`[20, 25, -10]`), Rechazadas: 3, Promedio: `11.6667` ((20 + 25 - 10) / 3 = 35 / 3).
+
+### 2. Control de flujo en `registrar()` (Paso 2)
+La adición `lecturas.add(valor)` está al final del método (línea 30). Si el texto es nulo/blanco, falla la conversión en `parseInt` (capturada en `catch (NumberFormatException)`), o el valor está fuera del rango [-10, 50], se incrementa `rechazadas`, se imprime el mensaje correspondiente y se ejecuta un `return false;` inmediato, impidiendo que el dato inválido llegue a la lista.
+
+### 3. Diferencia entre error de conversión y rechazo de rango (Paso 6)
+> **Respuesta:** Un error de conversión ocurre a nivel sintáctico cuando el texto no se puede transformar a una representación binaria entera válida en Java (lanzando `NumberFormatException`), mientras que un rechazo de rango ocurre a nivel de reglas de negocio/dominio sobre un entero ya convertido válidamente que incumple los límites establecidos (-10 a 50).
+
+### 4. Comprobaciones de escenarios alternativos (Paso 5)
+
+#### Tabla de comprobaciones
+
+| Entradas evaluadas | Aceptadas | Rechazadas | Promedio | Observación |
+| --- | --- | --- | --- | --- |
+| `{"abc", "", "80"}` | 0 | 3 | `Sin datos` | Cada entrada falla por un motivo distinto; la lista queda vacía y retorna `"Sin datos"` sin provocar división por cero. |
+| `{"-10", "50"}` | 2 | 0 | `20.0000` | Los valores límites inclusivos son ambos aceptados; promedio exacto `(-10 + 50) / 2 = 20.0000`. |
+

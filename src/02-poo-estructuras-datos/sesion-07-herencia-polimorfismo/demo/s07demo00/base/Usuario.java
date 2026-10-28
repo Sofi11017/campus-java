@@ -13,6 +13,7 @@ public class Usuario {
     }
 
     protected String describirIdentidad() {
+
         return "Usuario: " + nombre;
     }
 }

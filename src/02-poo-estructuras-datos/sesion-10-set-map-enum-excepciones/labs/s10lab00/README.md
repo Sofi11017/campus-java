@@ -32,3 +32,29 @@ Disponibles: 3
 ```
 
 Guarda la respuesta breve y las dos comprobaciones en tu README personal o el del equipo indicado. Completa lo pendiente para la siguiente clase y entrega por Campus según indique el docente.
+
+---
+
+## Solución y Respuestas del Laboratorio
+
+### 1. Predicción inicial (Paso 1)
+- **Materiales requeridos:** `CARTULINA`, `PEGAMENTO`, `TIJERAS`.
+- **Materiales disponibles:** `cartulina` (normalizado a `CARTULINA`), `REGLA` (normalizado a `REGLA`).
+- **Faltantes previstos:** `[PEGAMENTO, TIJERAS]`.
+- **Observación:** `REGLA` no reduce faltantes porque no forma parte del conjunto de materiales requeridos (`requeridos` no contiene `REGLA`).
+
+### 2. Explicación de copia en `faltantes()` (Paso 3)
+> **Respuesta:** Si se modificara directamente el conjunto `requeridos` con `removeAll`, se eliminarían de forma irreversible los elementos ya disponibles del conjunto original, destruyendo el registro histórico de qué materiales requería el taller y haciendo imposible reevaluar los faltantes si el inventario de disponibles cambia.
+
+### 3. Comprobaciones de los Pasos 4 y 5
+Al añadir `taller.disponer("TIJERAS")`, el conjunto de faltantes pasa a ser `[]` (conjunto vacío), mientras que `requeridos` conserva intactos sus 3 elementos originales (`CARTULINA`, `PEGAMENTO`, `TIJERAS`).
+
+#### Tabla de comprobaciones
+
+| Entrada | Operación | Esperado | Obtenido | Justificación |
+| --- | --- | --- | --- | --- |
+| `null` | `taller.disponer(null)` | `false`, cant=4 | `false`, cant=4 | `normalizar()` produce `""`, rechazada por `!valor.isEmpty()`. |
+| `"   "` | `taller.disponer("   ")` | `false`, cant=4 | `false`, cant=4 | `strip()` elimina espacios resultando en `""`, rechazada por `!valor.isEmpty()`. |
+| `" cartulina "` | `taller.disponer(" cartulina ")` | `false`, cant=4 | `false`, cant=4 | `normalizar` produce `"CARTULINA"`; `LinkedHashSet.add()` rechaza duplicados. |
+| `"TIJERAS"` | `taller.disponer("TIJERAS")` | `true`, faltantes `[]` | `true`, faltantes `[]` | Se agrega a disponibles y reduce los faltantes a conjunto vacío sin alterar requeridos. |
+

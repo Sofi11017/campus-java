@@ -31,3 +31,35 @@ Total conservado: 6
 ```
 
 Guarda la respuesta breve y las dos comprobaciones en tu README personal o el del equipo indicado. Completa lo pendiente para la siguiente clase y entrega por Campus según indique el docente.
+
+---
+
+## Solución y Respuestas del Laboratorio
+
+### 1. Predicción inicial (Paso 1)
+- **Secuencia:** `A`, `B`, `A`, `C`, `B`, `A`.
+- **Conteo previsto:** `A=3`, `B=2`, `C=1`.
+- **Total previsto:** 6 votos.
+
+### 2. Explicación de `votar()` y `put()` (Paso 2)
+> **Respuesta:** En la estructura `Map`, cada clave es única y está asociada a un solo valor. Dado que `Integer` es inmutable en Java, para incrementar el contador de una opción existente es necesario invocar `put(clave, nuevoValor)`, el cual reemplaza el valor anterior asociado a esa clave con el nuevo total sumado.
+
+### 3. Secuencia alterna y ordenamiento con `TreeMap` (Paso 4)
+- **Secuencia:** `C`, `A`, `B`, `A`, `B`, `A`.
+- **Resultado:** `{A=3, B=2, C=1}`, Total: 6.
+- **Observación:** `TreeMap` ordena sus claves siguiendo el orden natural (alfabético para `String`), por lo que el orden en que se emitan los votos no altera la estructura ni el orden de presentación del reporte `{A=..., B=..., C=...}`.
+
+### 4. Casos borde y comprobaciones (Paso 5)
+- Secuencia vacía inicializa correctamente el mapa en `{A=0, B=0, C=0}` y total en `0`.
+- Votos con espacios como `" a "` se limpian con `strip()` y se normalizan con `toUpperCase()`, resultando en la clave `"A"` (válida).
+- Votos inválidos como `null` o `"X"` son rechazados inmediatamente por validación sin modificar contadores.
+
+#### Tabla de comprobaciones
+
+| Entrada | Operación | Esperado | Obtenido | Justificación |
+| --- | --- | --- | --- | --- |
+| Secuencia vacía | `new RecuentoVotos()` | `{A=0, B=0, C=0}`, total: 0 | `{A=0, B=0, C=0}`, total: 0 | El constructor inicializa las tres claves con valor cero. |
+| `" a "` | `votar(" a ")` | `true`, total: 1 | `true`, total: 1 | Se normaliza a `"A"`, clave existente; suma 1 al contador de A. |
+| `null` | `votar(null)` | `false`, total conservado | `false`, total conservado | Validación `entrada == null` retorna `false` inmediatamente. |
+| `"X"` | `votar("X")` | `false`, total conservado | `false`, total conservado | Clave no existe en el mapa inicial; `containsKey("X")` retorna `false`. |
+

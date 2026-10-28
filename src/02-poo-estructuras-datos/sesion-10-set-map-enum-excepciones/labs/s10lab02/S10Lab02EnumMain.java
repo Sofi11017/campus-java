@@ -18,5 +18,18 @@ public class S10Lab02EnumMain {
         System.out.println(baja.resumen());
         System.out.println("Minutos negativos: " + baja.registrarMinutos(-1));
         System.out.println(baja.resumen());
+
+        // Comprobaciones adicionales (paso 5 de la actividad)
+        System.out.println("\n--- Comprobaciones adicionales (paso 5) ---");
+        Incidencia mediaPrueba = new Incidencia(Prioridad.MEDIA);
+        mediaPrueba.registrarMinutos(60);
+        System.out.println("MEDIA 60 min (limite exacto) vencida: " + mediaPrueba.estaVencida());
+        mediaPrueba.registrarMinutos(61);
+        System.out.println("MEDIA 61 min (supera limite) vencida: " + mediaPrueba.estaVencida());
+
+        Incidencia bajaPrueba = new Incidencia(Prioridad.BAJA);
+        bajaPrueba.registrarMinutos(120);
+        System.out.println("BAJA 120 min (limite exacto) vencida: " + bajaPrueba.estaVencida());
     }
 }
+

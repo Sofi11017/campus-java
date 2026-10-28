@@ -37,3 +37,32 @@ BAJA 121 min: vencida=true
 ```
 
 Guarda la respuesta breve y las dos comprobaciones en tu README personal o el del equipo indicado. Completa lo pendiente para la siguiente clase y entrega por Campus según indique el docente.
+
+---
+
+## Solución y Respuestas del Laboratorio
+
+### 1. Constantes y límites en `Prioridad` (Paso 1 y 2)
+- Constantes: `BAJA(120)`, `MEDIA(60)`, `ALTA(15)`.
+- `Prioridad.values()` recorre el arreglo de constantes en el orden en que fueron declaradas (`BAJA`, `MEDIA`, `ALTA`).
+- El límite en minutos proviene del campo `private final int limiteMinutos`, asignado en el constructor privado del enum y consultado mediante `getLimiteMinutos()`.
+- La clase `Incidencia` conserva la referencia `Prioridad` como campo final inmutable y consulta directamente `prioridad.getLimiteMinutos()` de forma polimórfica sin usar `ordinal()` ni condicionales con `String`.
+
+### 2. Explicación de vencimiento con ALTA (Paso 3)
+> **Respuesta:** En `estaVencida()`, se utiliza el operador de comparación mayor estricto (`>`), evaluando `minutosTranscurridos > prioridad.getLimiteMinutos()`. Por ello, con 15 minutos exactos `15 > 15` es `false` (la incidencia sigue en plazo), mientras que con 16 minutos `16 > 15` es `true` (ha superado el tiempo máximo permitido).
+
+### 3. Rechazo de valores inválidos (Paso 4)
+- Invocar `registrarMinutos(-1)` es rechazado por la condición `if (minutos < 0) return false;`.
+- Al retornar `false`, el estado previo del objeto se conserva íntegro (121 minutos), demostrando que no se aceptan valores negativos ni se altera el tiempo transcurrido ante intentos fallidos.
+
+### 4. Comprobaciones de escenarios (Paso 5)
+
+#### Tabla de comprobaciones
+
+| Incidencia / Prioridad | Minutos registrados | Esperado `estaVencida()` | Obtenido `estaVencida()` | Justificación |
+| --- | --- | --- | --- | --- |
+| MEDIA (límite 60) | 60 | `false` | `false` | En el límite exacto no está vencida (`60 > 60 == false`). |
+| MEDIA (límite 60) | 61 | `true` | `true` | Supera estrictamente el límite por 1 minuto (`61 > 60 == true`). |
+| BAJA (límite 120) | 120 | `false` | `false` | En el límite exacto no está vencida (`120 > 120 == false`). |
+| BAJA (límite 120) | -1 | Registro: `false` | Registro: `false` | Los minutos negativos se rechazan y conservan los minutos previos. |
+
