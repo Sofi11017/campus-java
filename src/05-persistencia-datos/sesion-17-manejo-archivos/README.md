@@ -21,11 +21,11 @@ Persistir es conservar información para recuperarla en otra ejecución. Usaremo
 
 ## Dónde se guardan los datos
 
-Cada Main imprime **Datos: ruta absoluta**. Por defecto usa una carpeta distinta por ejercicio en java.io.tmpdir/campus-java-s17. Esa carpeta se conserva entre ejecuciones, pero el sistema puede limpiarla: es un espacio didáctico, no almacenamiento de producción.
+Los demos usan una ruta relativa desde la raíz campus-java hasta src/05-persistencia-datos/sesion-17-manejo-archivos/demo/s17demoNN/datos. No necesitan argumentos. Cada Main imprime la ubicación absoluta. En IntelliJ, configura Working directory como la raíz campus-java (Run → Edit Configurations). Las rutas relativas parten del directorio de trabajo, no de la ubicación del archivo Java. Path.of recibe cada carpeta por separado y adapta los separadores a Windows, Linux o macOS.
 
-En IntelliJ, usa Run sobre el Main indicado. Para elegir una carpeta personal, agrega su ruta como primer argumento en **Run → Edit Configurations → Program arguments**; si tiene espacios, escríbela entre comillas. No es un parámetro de la JVM.
+Conserva datos/ entre ejecuciones para observar la persistencia. Para un ensayo nuevo, cambia solo la última carpeta en Path.of, por ejemplo a datos-prueba; no borres archivos personales.
 
-Conserva la misma carpeta al probar dos ejecuciones; para empezar desde cero usa otra carpeta de ensayo vacía. No borres archivos personales para reiniciar un ejemplo. Las rutas relativas se resuelven contra el directorio de trabajo del proceso, no contra el .java.
+Los labs conservan por ahora su configuración original: carpeta por ejercicio en java.io.tmpdir/campus-java-s17, o una ruta indicada como primer argumento. Este ajuste corresponde a los demos.
 
 Los demos son independientes y tienen UML con todas sus clases propias. Usa JDK 17 o21; demo y labs son raíces de código fuente. Los labs compilan, pero muestran pendiente o conteos incompletos hasta completar sus TODO.
 

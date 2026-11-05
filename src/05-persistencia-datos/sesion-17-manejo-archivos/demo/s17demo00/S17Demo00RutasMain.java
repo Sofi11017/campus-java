@@ -7,16 +7,11 @@ import java.nio.file.Path;
 
 public class S17Demo00RutasMain {
     public static void main(String[] args) throws IOException {
-        Path relativa = Path.of("datos", "pedidos.txt");
-        System.out.println("Directorio de trabajo: " + Path.of("").toAbsolutePath());
-        System.out.println("Relativa: " + relativa);
-        System.out.println("Resuelta: " + relativa.toAbsolutePath());
-        Path base = args.length == 0
-                ? Path.of(System.getProperty("java.io.tmpdir"), "campus-java-s17", "demo00")
-                : Path.of(args[0]);
-        base = base.toAbsolutePath().normalize();
-        System.out.println("Datos: " + base);
+        Path base = Path.of("src", "05-persistencia-datos", "sesion-17-manejo-archivos", "demo", "s17demo00", "datos");
+
+        System.out.println("Datos: " + base.toAbsolutePath());
         Files.createDirectories(base);
+        // resolve: construye la dirección de un archivo dentro de la carpeta base
         Path archivo = base.resolve("pedidos.txt");
         try {
             Files.createFile(archivo);

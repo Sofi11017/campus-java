@@ -2,6 +2,8 @@
 
 **Problema:** conservar un pedido, archivar su copia y eliminar únicamente un borrador propio.
 
+Los archivos se crean en datos/, dentro de esta carpeta del demo. Ejecuta sin argumentos. En IntelliJ, configura Working directory como la raíz campus-java (Run → Edit Configurations). Path.of recibe las carpetas por separado y adapta los separadores a cada sistema operativo. La consola muestra la ubicación absoluta.
+
 1. Ejecuta en una carpeta nueva. Se prepara pedido.txt, se copia a respaldo.txt y solo esa copia se mueve a historico/pedido.txt.
 2. Comprueba: origen presente=true, respaldo presente=false, historico presente=true. Los contenidos de origen e histórico coinciden.
 3. Ejecuta otra vez: el histórico existente no se reemplaza; la nueva copia queda en respaldo.txt. Ambos contenidos se conservan.

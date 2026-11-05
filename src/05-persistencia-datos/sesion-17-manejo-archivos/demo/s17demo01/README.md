@@ -2,6 +2,8 @@
 
 **Problema:** al reiniciar, los pedidos no deben desaparecer. Elegir truncar o agregar cambia lo que se conserva.
 
+Los archivos se crean en datos/, dentro de esta carpeta del demo. Ejecuta sin argumentos. En IntelliJ, configura Working directory como la raíz campus-java (Run → Edit Configurations). Path.of recibe las carpetas por separado y adapta los separadores a cada sistema operativo. La consola muestra la ubicación absoluta.
+
 1. Ejecuta sobre una carpeta nueva: Lineas antes:0, Lineas despues:2. Abre historial.txt y comprueba María y Andrés.
 2. Cierra el proceso y vuelve a ejecutar el mismo Main con la misma carpeta: antes2, despues4. Las primeras dos líneas permanecen.
 3. Sigue el try-with-resources: Files.newBufferedWriter con UTF-8, CREATE y APPEND; write agrega texto y newLine separa registros. Al terminar el bloque se cierra incluso si hay error.

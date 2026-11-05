@@ -9,19 +9,18 @@ import java.nio.file.StandardOpenOption;
 
 public class S17Demo03GestionMain {
     public static void main(String[] args) throws IOException {
-        Path base = args.length == 0
-                ? Path.of(System.getProperty("java.io.tmpdir"), "campus-java-s17", "demo03")
-                : Path.of(args[0]);
-        base = base.toAbsolutePath().normalize();
-        System.out.println("Datos: " + base);
+        Path base = Path.of("src", "05-persistencia-datos", "sesion-17-manejo-archivos", "demo", "s17demo03", "datos");
+
+        System.out.println("Datos: " + base.toAbsolutePath());
         Files.createDirectories(base);
         Path origen = base.resolve("pedido.txt");
         Path respaldo = base.resolve("respaldo.txt");
+//        Añade la carpeta historico a la ruta base
         Path historico = base.resolve("historico").resolve("pedido.txt");
+//        Obtiene la carpeta que contiene el archivo historico
         Files.createDirectories(historico.getParent());
         try {
-            Files.writeString(origen, "P-001;Ana;ENTREGADO\n",
-                    StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
+            Files.writeString(origen, "P-001;Ana;ENTREGADO\n", StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
         } catch (FileAlreadyExistsException error) {
             System.out.println("Origen existente conservado");
         }

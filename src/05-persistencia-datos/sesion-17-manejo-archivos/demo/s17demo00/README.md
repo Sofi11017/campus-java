@@ -2,7 +2,9 @@
 
 **Problema:** representar una ruta no crea el archivo. Necesitamos preparar el almacenamiento y saber dónde se resuelve una ruta relativa.
 
-1. Lee el Main y ejecuta. Observa el directorio de trabajo, datos/pedidos.txt y su resolución absoluta. Esa ruta explicativa no se escribe; las operaciones reales usan la carpeta Datos que imprime el programa.
+Los archivos se crean en datos/, dentro de esta carpeta del demo. Ejecuta sin argumentos. En IntelliJ, configura Working directory como la raíz campus-java (Run → Edit Configurations). Path.of recibe las carpetas por separado y adapta los separadores a cada sistema operativo. La consola muestra la ubicación absoluta.
+
+1. Lee Path.of: recorre desde src hasta s17demo00/datos. Ejecuta el Main y abre esa carpeta en IntelliJ: allí se crea pedidos.txt. La consola indica su ubicación absoluta.
 2. En una carpeta nueva debe aparecer Archivo creado, Es archivo:true y Bytes:0.
 3. Ejecuta otra vez: Archivo existente conservado. El programa no vacía pedidos.txt. Si agregas texto manualmente, una ejecución posterior conserva ese contenido y cambia el tamaño en bytes.
 4. Sigue Path.of → resolve → createDirectories → createFile. new File o Path.of por sí solos no crean un archivo.

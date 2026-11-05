@@ -3,6 +3,9 @@ package s17demo04;
 import java.io.Serializable;
 
 public final class PedidoSerializable implements Serializable {
+    //    serialización nativa: representar el estado en formato binario
+    //    serialVersionUID permite identificar la versión de serialización de una clase y
+    //    participa en la comprobación de compatibilidad durante la deserialización
     private static final long serialVersionUID = 1L;
     private final String codigo;
     private final String cliente;
@@ -14,11 +17,7 @@ public final class PedidoSerializable implements Serializable {
     }
 
     public void validar() {
-        if (codigo == null || cliente == null || codigo.isBlank() || cliente.isBlank()
-                || codigo.length() > 64 || cliente.length() > 64
-                || codigo.contains(";") || cliente.contains(";")
-                || codigo.contains("\n") || cliente.contains("\n")
-                || codigo.contains("\r") || cliente.contains("\r")) {
+        if (codigo == null || cliente == null || codigo.isBlank() || cliente.isBlank() || codigo.length() > 64 || cliente.length() > 64 || codigo.contains(";") || cliente.contains(";") || codigo.contains("\n") || cliente.contains("\n") || codigo.contains("\r") || cliente.contains("\r")) {
             throw new IllegalArgumentException("Codigo y cliente simples de 1 a 64 caracteres");
         }
     }

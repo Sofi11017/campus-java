@@ -8,25 +8,53 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
+/**
+ * This class demonstrates how to read and validate order data from a text file.
+ * It implements file handling, data validation, and error management during file reading.
+ * <p>
+ * The application:
+ * - Prepares a sample file if it does not exist (based on the prepararMuestra flag).
+ * - Reads a file containing order data line by line.
+ * - Validates each line, checking for proper formatting and expected data values.
+ * - Creates instances of the {@link Pedido} class for valid records.
+ * - Reports the number of valid and invalid records in the file.
+ * <p>
+ * Key concepts demonstrated:
+ * - Use of {@link Path}, {@link Files}, and file I/O operations.
+ * - Handling of exceptions such as {@link IOException} and {@link IllegalArgumentException}.
+ * - Try-with-resources to manage the {@link BufferedReader} resource and ensure proper cleanup.
+ * - Splitting and validating delimited text data using {@code String.split()}.
+ * <p>
+ * Constraints and behaviors:
+ * - The input file is expected to contain order records in a semicolon-delimited format
+ * (e.g., "P-001;Ana;PENDIENTE"). Lines with missing or invalid fields are treated as errors.
+ * - Supported order statuses are "PENDIENTE" and "ENTREGADO".
+ * - Lines that do not meet the requirements are skipped, with details printed to the console.
+ * - Empty lines in the file are ignored.
+ * - If the file does not exist when running without sample data preparation, an {@link IOException} is thrown.
+ * <p>
+ * Note: This implementation is specific to the format and requirements described and does not
+ * serve as a generic CSV parser.
+ */
 public class S17Demo02LecturaMain {
     public static void main(String[] args) throws IOException {
-        Path base = args.length == 0
-                ? Path.of(System.getProperty("java.io.tmpdir"), "campus-java-s17", "demo02")
-                : Path.of(args[0]);
-        base = base.toAbsolutePath().normalize();
-        System.out.println("Datos: " + base);
+        Path base = Path.of("src", "05-persistencia-datos", "sesion-17-manejo-archivos", "demo", "s17demo02", "datos");
+
+        System.out.println("Datos: " + base.toAbsolutePath());
         Files.createDirectories(base);
         Path archivo = base.resolve("pedidos.txt");
-        // El segundo argumento permite probar un archivo ausente sin preparar la muestra.
-        if (args.length < 2 || !args[1].equals("solo-leer")) {
+        // Cambia a false para probar la lectura sin crear la muestra.
+        boolean prepararMuestra = true;
+        if (prepararMuestra) {
             try {
-                Files.writeString(archivo,
-                        "P-001;Ana;PENDIENTE\nP-002;Luis;ENTREGADO\nP-003;María\nP-004;Sara;OTRO\n",
-                        StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
+                // CREATE_NEW: crea el archivo solo si NO existe; falla con FileAlreadyExistsException si ya existe.
+                // CREATE: crea el archivo si NO existe; si existe, lo abre sin error (puede sobrescribirlo).
+                Files.writeString(archivo, "P-001;Ana;PENDIENTE\nP-002;Luis;ENTREGADO\nP-003;María\nP-004;Sara;OTRO\n", StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
             } catch (FileAlreadyExistsException error) {
                 System.out.println("Entrada existente conservada");
             }
         }
+//        Un archivo regular es un archivo normal que contiene datos (texto, imágenes, binarios, etc.)
         if (!Files.isRegularFile(archivo)) {
             throw new IOException("No existe un archivo regular de pedidos: " + archivo);
         }

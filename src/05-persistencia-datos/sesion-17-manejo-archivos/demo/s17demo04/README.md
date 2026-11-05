@@ -2,6 +2,8 @@
 
 **Problema:** conservar el mismo estado no exige un único formato. Compara lectura humana con acoplamiento a clases Java.
 
+Los archivos se crean en datos/, dentro de esta carpeta del demo. Ejecuta sin argumentos. En IntelliJ, configura Working directory como la raíz campus-java (Run → Edit Configurations). Path.of recibe las carpetas por separado y adapta los separadores a cada sistema operativo. La consola muestra la ubicación absoluta.
+
 1. Lee PedidoSerializable.java: Serializable es una interfaz marcadora; serialVersionUID participa en compatibilidad, no migra esquemas.
 2. Ejecuta: Texto:P-001;María, Binario recuperado:P-001;María y Mismo contenido:true. Los nombres finales varían porque se crean archivos propios únicos.
 3. Abre el .txt para reconocer sus campos; el .ser contiene serialización binaria, no texto aunque lo renombraras.
