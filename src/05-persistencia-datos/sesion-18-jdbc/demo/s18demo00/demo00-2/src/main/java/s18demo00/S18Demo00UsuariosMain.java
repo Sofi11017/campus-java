@@ -8,15 +8,19 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class S18Demo00UsuariosMain {
+    private static final String URL = "jdbc:mysql://localhost:3306/campus_java_s18";
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "123456";
+
     public static void main(String[] args) {
         try {
-            String url = System.getenv("DB_URL");
+/*            String url = System.getenv("DB_URL");
             String usuario = System.getenv("DB_USER");
-            String clave = System.getenv("DB_PASSWORD");
-            if (url == null || url.isBlank() || usuario == null || usuario.isBlank() || clave == null) {
+            String clave = System.getenv("DB_PASSWORD");*/
+            if (URL == null || URL.isBlank() || DB_USER == null || DB_USER.isBlank() || DB_PASSWORD == null) {
                 throw new IllegalArgumentException("Configura DB_URL, DB_USER y DB_PASSWORD en IntelliJ.");
             }
-            try (Connection conexion = DriverManager.getConnection(url, usuario, clave);
+            try (Connection conexion = DriverManager.getConnection(URL, DB_USER, DB_PASSWORD);
                  Scanner entrada = new Scanner(System.in)) {
                 if (!conexion.isValid(5)) {
                     throw new SQLException("Conexion no valida");

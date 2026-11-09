@@ -1,4 +1,5 @@
 -- Ejecuta primero la preparación administrativa del README de la sesión.
+CREATE SCHEMA `campus_java_s18` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
 USE campus_java_s18;
 
 CREATE TABLE IF NOT EXISTS usuarios (
