@@ -12,13 +12,13 @@ public class S17Lab00BibliotecaMain {
             throw new IllegalArgumentException("Seccion permitida: infantil, ciencia o arte");
         }
         Path carpeta = base.resolve(seccion);
-        // TODO 1: Crear carpeta y padres mediante Files.createDirectories(carpeta).
+        Files.createDirectories(carpeta); // TODO 1: Crear carpeta y padres.
         Path archivo = carpeta.resolve("inventario.txt");
         try {
             if (Files.isDirectory(archivo)) {
                 throw new FileAlreadyExistsException(archivo.toString());
             }
-            // TODO 2: Crear archivo sin reemplazar uno existente mediante Files.createFile.
+            Files.createFile(archivo); // TODO 2: Crear archivo sin reemplazar uno existente.
         } catch (FileAlreadyExistsException error) {
             if (!Files.isRegularFile(archivo)) {
                 throw new IOException("La ruta del inventario no es archivo: " + archivo, error);
@@ -31,7 +31,7 @@ public class S17Lab00BibliotecaMain {
         Path base = args.length == 0 ? Path.of(System.getProperty("java.io.tmpdir"), "campus-java-s17", "lab00") : Path.of(args[0]);
         base = base.toAbsolutePath().normalize();
         System.out.println("Datos: " + base);
-        String seccion = "infantil";
+        String seccion = "ciencia";
         boolean preparado = preparar(base, seccion);
         System.out.println(preparado ? "Seccion preparada: " + seccion : "PENDIENTE: completar TODO 1 y 2");
     }

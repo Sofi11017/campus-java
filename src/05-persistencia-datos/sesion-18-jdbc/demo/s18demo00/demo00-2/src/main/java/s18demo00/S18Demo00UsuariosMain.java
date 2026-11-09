@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class S18Demo00UsuariosMain {
     private static final String URL = "jdbc:mysql://localhost:3306/campus_java_s18";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "123456";
+    private static final String DB_PASSWORD = "Campus2023!";
 
     public static void main(String[] args) {
         try {

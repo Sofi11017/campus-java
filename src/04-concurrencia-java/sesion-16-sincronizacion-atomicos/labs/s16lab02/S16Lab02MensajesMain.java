@@ -17,7 +17,7 @@ public class S16Lab02MensajesMain {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        int agentes = 4;
+        int agentes = 6;
         int mensajesPorAgente = 250;
         int esperado = agentes * mensajesPorAgente;
         int observado = procesar(agentes, mensajesPorAgente);

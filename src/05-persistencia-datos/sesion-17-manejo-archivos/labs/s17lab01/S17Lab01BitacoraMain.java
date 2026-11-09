@@ -12,7 +12,15 @@ public class S17Lab01BitacoraMain {
         Files.createDirectories(archivo.getParent());
         // TODO 1: Abrir BufferedWriter UTF-8 con CREATE y APPEND, en try-with-resources.
         // TODO 2: Escribir las dos tareas indicadas, cada una seguida de newLine().
-        return false; // Sustituir por true solo despues del cierre correcto.
+        try (BufferedWriter escritor = Files.newBufferedWriter(
+                archivo, StandardCharsets.UTF_8,
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
+            escritor.write("Revisión eléctrica");
+            escritor.newLine();
+            escritor.write("Limpieza de área común");
+            escritor.newLine();
+        }
+        return true; // Sustituir por true solo despues del cierre correcto.
     }
 
     public static void main(String[] args) throws IOException {
