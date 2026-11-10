@@ -8,6 +8,8 @@
     <modules>
         <module>demo/s18demo00/demo00-2</module>
         <module>demo/s18demo01</module>
+        <module>labs/s18lab00</module>
+        <module>labs/s18lab01</module>
     </modules>
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
