@@ -18,3 +18,4 @@ public class ConexionFactory {
         return DriverManager.getConnection(URL, DB_USER, DB_PASSWORD);
     }
 }
+

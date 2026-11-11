@@ -62,3 +62,4 @@ public class ProductoController {
         vista.mostrar(filas == 0 ? "Sin coincidencias para ese id." : "Filas afectadas: " + filas);
     }
 }
+

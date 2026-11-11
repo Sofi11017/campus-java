@@ -154,3 +154,4 @@ Una tienda necesita registrar productos (`id`, `nombre`, `stock`) y modificar su
 > **Respuesta:**  
 > - `executeQuery()` se usa para consultas de lectura (`SELECT`) y retorna un objeto `ResultSet` con los registros encontrados.  
 > - `executeUpdate()` se usa para sentencias de manipulación (`INSERT`, `UPDATE`, `DELETE`) o definición (`DDL`) y retorna un número entero (`int`) que representa la cantidad de filas afectadas en la base de datos.
+

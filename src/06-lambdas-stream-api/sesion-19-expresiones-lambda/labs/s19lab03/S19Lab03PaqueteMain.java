@@ -2,7 +2,8 @@ package s19lab03;
 
 import java.util.function.Function;
 
-public class S19Lab03PaqueteMain {
+public class+6++
+S19Lab03PaqueteMain {
     public static void main(String[] args) {
         // Interfaz elegida: Function<Integer, Double>
         // Recibe: peso en gramos (Integer)

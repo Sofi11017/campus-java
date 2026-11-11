@@ -85,3 +85,4 @@ Error: El ISBN ya se encuentra registrado (debe ser unico).
 ## 💡 Conclusión para explicar al profesor
 
 > En este laboratorio aplicamos los fundamentos de **JDBC**: cómo cargar el driver Connector/J mediante Maven, abrir una conexión con `DriverManager`, validar su disponibilidad con `isValid()`, y ejecutar operaciones DML y DQL usando siempre `PreparedStatement` para proteger la integridad de los datos frente a inyecciones SQL y caracteres especiales. Además, demostramos cómo manejar el error de clave duplicada (`UNIQUE` en ISBN) a nivel de aplicación sin romper el ciclo del menú.
+

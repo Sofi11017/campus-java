@@ -201,3 +201,4 @@ Es una forma concisa y directa de implementar ese único método abstracto sin t
 | **Lab 03: Paquete gramos→kg** | Convierte 1 dato en otro tipo | `Function<T, R>` | `apply(x)` |
 | **Lab 04: Minutos sala** | Resta 2 números independientes | `BiFunction<T, U, R>` | `apply(x, y)` |
 | **Lab 05: Participantes** | Ordena nombres alfabéticamente | `Comparator<T>` | `compare(a, b)` en `sort()` |
+

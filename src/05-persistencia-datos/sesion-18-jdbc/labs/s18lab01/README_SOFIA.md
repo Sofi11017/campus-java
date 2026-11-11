@@ -101,3 +101,4 @@ Sin coincidencias para ese id.
 > - **Controlador**: orquesta el flujo y captura las excepciones.
 > - **Modelo**: custodia las reglas de negocio (stock no negativo).
 > - **ConexionFactory**: genera conexiones bajo demanda y desacopla las credenciales del código de acceso a datos.
+
