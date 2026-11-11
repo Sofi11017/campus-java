@@ -2,6 +2,7 @@ package s19demo00;
 
 public class S19Demo00LambdaMain {
     public static void main(String[] args) {
+
         int minimo = 100_000;
         ReglaMonto explicita = new ReglaMontoMinimo(minimo);
         ReglaMonto lambda = monto -> monto >= minimo;
